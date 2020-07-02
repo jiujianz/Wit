@@ -1,10 +1,10 @@
 version: '3'
 services:
   app:
-    #app_goの中にあるDockerfileの読み込み
     build: . 
-    container_name: "app_go"
+    container_name: "Wit"
     tty: true
-    #ホストのディレクトリをコンテナにマウント
     volumes:
       - ./app:/go/src/app
+    ports: 
+      - 8080:8080
