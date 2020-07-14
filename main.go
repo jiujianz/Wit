@@ -1,7 +1,7 @@
 package main
 
 import(
-	"./controller"
+	"./controllers"
 	"github.com/gin-gonic/gin"
 )
 
