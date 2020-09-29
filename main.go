@@ -1,13 +1,9 @@
 package main
 
 import(
-	"./controllers"
-	"github.com/gin-gonic/gin"
+	"./api/controller"
 )
 
 func main() {
-	router := gin.Default()
-
-	router.GET("/", controller.IndexGET)
-	router.Run(":3000")
+	server.Init()
 }
