@@ -1,9 +1,9 @@
 package main
 
-import(
-	"./api/controller"
+import (
+	"./api/server/server"
 )
 
 func main() {
-	server.Init()
+	server.Router()
 }
