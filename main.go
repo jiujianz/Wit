@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./api/server/server"
+	"./api/server"
 )
 
 func main() {
