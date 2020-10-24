@@ -1,29 +1,31 @@
 package db
 
-import(
+import (
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-func gormConnect() *gorm.DB {
-	DBMS := "mysql"
-	USER := <DB user>
-	PASS := <DB Password>
-	PROTOCOL := tcp(<DBのIPアドレス>:<PORT>)
-	DBNAME := <DB NAME>
+func Connect() *gorm.DB {
+	DBMS := db_DBMS
+	USER := db_USER
+	PASS := db_PASS
+	PROTOCOL := db_PORT
+	DBNAME := db_DBNAME
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
 	db, err := gorm.Open(DBMS, CONNECT)
 
 	if err != nil {
-			panic(err.Error())
+		panic(err.Error())
 	}
 	fmt.Println("db connected: ", &db)
 	return db
 }
 
 func main() {
-db := gormConnect()
+	db := gormConnect()
 
-defer db.Close()
-db.LogMode(true)
+	defer db.Close()
+	db.LogMode(true)
 }
