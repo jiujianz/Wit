@@ -17,6 +17,10 @@ func Router() *gin.Engine {
 			c.HTML(http.StatusOK, "index.html", map[string]interface{}{})
 		})
 
+		router.LoadHTMLFiles("UI/signup.html")
+		v1.GET("/signup", func(c *gin.Context) {
+			c.HTML(http.StatusOK, "signup.html", map[string]interface{}{})
+		})
 		v1.POST("/signup", controller.CreateUser)
 	}
 
