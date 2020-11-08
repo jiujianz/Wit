@@ -22,3 +22,12 @@ func CreateUser(user *User) (err error) {
 	}
 	return nil
 }
+
+func GetUserByLoginID(user *User) (err error) {
+	loginID := user.LoginID
+	password := user.Password
+	if err = DBConfig.DB.Where("login_id = ? and password = ?", loginID, password).First(user).Error; err != nil {
+		return err
+	}
+	return nil
+}
