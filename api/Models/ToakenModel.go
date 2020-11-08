@@ -12,7 +12,7 @@ import (
 
 type Toaken struct {
 	ToakenID string `json:"toakenId"`
-	UserID   int    `json:"userId"`
+	LoginID  string `json:"loginId"`
 	//limitTime time.Time `json:"limitTime"`
 }
 
