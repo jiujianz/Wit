@@ -18,8 +18,8 @@ func Router() *gin.Engine {
 		})
 
 		v1.POST("/signup", controller.CreateUser)
-
 		v1.POST("/wit", controller.CreateWit)
+		v1.POST("/token", controller.CreateToaken)
 	}
 
 	return router
