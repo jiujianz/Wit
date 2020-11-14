@@ -21,7 +21,7 @@ func Router() *gin.Engine {
 		//v1.POST("/login", controller.GetUserByLoginID)
 		v1.POST("/login", controller.Login)
 		v1.POST("/wit", controller.CreateWit)
-		v1.POST("/token", controller.CreateToaken)
+		//v1.POST("/token", controller.CreateToaken)
 	}
 
 	return router
