@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"reflect"
 	"time"
 
 	models "../Models"
@@ -76,7 +75,5 @@ func GetUserByLoginID(c *gin.Context) models.User {
 		// TODO error response
 		//return "no data found"
 	}
-	fmt.Println(user)
-	fmt.Println(reflect.TypeOf(user.LoginID))
 	return user
 }

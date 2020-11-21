@@ -10,6 +10,7 @@ type User struct {
 	Password string `json："password"`
 	Email    string `json："email"`
 	UserName string `json："userName"`
+	ToakenID string `json："toakenId"`
 }
 
 func (b *User) TableName() string {
