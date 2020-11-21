@@ -1,31 +1,16 @@
-package models
+package service
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"time"
 
-	DBConfig "../Config"
+	models "../Models"
 	"github.com/dgrijalva/jwt-go"
-	_ "github.com/go-sql-driver/mysql"
+
+	"github.com/gin-gonic/gin"
 )
-
-type Toaken struct {
-	ToakenID string `json:"toakenId"`
-	UserID   int    `json:"userId"`
-	//limitTime time.Time `json:"limitTime"`
-}
-
-func (b *Toaken) TableName() string {
-	return "toaken_id"
-}
-
-func CreateToaken(token *Toaken) (err error) {
-	if err = DBConfig.DB.Create(token).Error; err != nil {
-		return err
-	}
-	return nil
-}
 
 type JWTService interface {
 	GenerateToaken(loginID string, isUser bool) string
@@ -43,13 +28,6 @@ type jwtServices struct {
 	issure    string
 }
 
-func JWTAuthService() JWTService {
-	return &jwtServices{
-		secretKey: getSecretKey(),
-		issure:    "Bikash",
-	}
-}
-
 func getSecretKey() string {
 	secret := os.Getenv("SECRET")
 	if secret == "" {
@@ -58,20 +36,20 @@ func getSecretKey() string {
 	return secret
 }
 
-func (service *jwtServices) GenerateToaken(loginID string, isUser bool) string {
+func GenerateToaken(loginID string, isUser bool) string {
 	claims := &authCustomClaims{
 		loginID,
 		isUser,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 48).Unix(),
-			Issuer:    service.issure,
+			Issuer:    "Wit",
 			IssuedAt:  time.Now().Unix(),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	//encoded string
-	t, err := token.SignedString([]byte(service.secretKey))
+	t, err := token.SignedString([]byte(getSecretKey()))
 	if err != nil {
 		panic(err)
 	}
@@ -86,5 +64,16 @@ func (service *jwtServices) ValidateToken(encodedToken string) (*jwt.Token, erro
 		}
 		return []byte(service.secretKey), nil
 	})
+}
 
+func GetUserByLoginID(c *gin.Context) models.User {
+	var user models.User
+	c.BindJSON(&user)
+	err := models.GetUserByLoginID(&user)
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+		// TODO error response
+		//return "no data found"
+	}
+	return user
 }
