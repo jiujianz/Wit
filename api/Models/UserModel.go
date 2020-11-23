@@ -3,9 +3,11 @@ package models
 import (
 	DBConfig "../Config"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 )
 
 type User struct {
+	DBConfig.Model
 	LoginID  string `json："LoginId"`
 	Password string `json："password"`
 	Email    string `json："email"`
@@ -27,7 +29,7 @@ func CreateUser(user *User) (err error) {
 func GetUserByLoginID(user *User) (err error) {
 	loginID := user.LoginID
 	password := user.Password
-	if err = DBConfig.DB.Where("login_id = ? and password = ?", loginID, password).First(user).Error; err != nil {
+	if err = DBConfig.DB.Where("login_id = ? and password = ?", loginID, password).First(user).Error; gorm.IsRecordNotFoundError(err) {
 		return err
 	}
 	return nil

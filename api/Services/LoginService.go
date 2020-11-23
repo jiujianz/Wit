@@ -2,7 +2,6 @@ package service
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 	"time"
 
@@ -66,14 +65,18 @@ func (service *jwtServices) ValidateToken(encodedToken string) (*jwt.Token, erro
 	})
 }
 
-func GetUserByLoginID(c *gin.Context) models.User {
+func GetUserByLoginID(c *gin.Context) (models.User, error) {
 	var user models.User
+	fmt.Println(user)
 	c.BindJSON(&user)
 	err := models.GetUserByLoginID(&user)
+	fmt.Println(err)
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+		//fmt.Println(c.AbortWithStatus(http.StatusNotFound))
 		// TODO error response
-		//return "no data found"
+		fmt.Println("error contents : ", err)
+		return user, err
 	}
-	return user
+	fmt.Println(user)
+	return user, nil
 }

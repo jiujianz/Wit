@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	service "../Services"
@@ -10,9 +9,12 @@ import (
 )
 
 func Login(c *gin.Context) {
-	user := service.GetUserByLoginID(c)
+	user, err := service.GetUserByLoginID(c)
+	if err != nil {
+		c.JSON(http.StatusNotFound, "data not found")
+		return
+	}
 	toaken := service.GenerateToaken(user.LoginID, true)
 	user.ToakenID = toaken
-	fmt.Println(user)
 	c.JSON(http.StatusOK, user)
 }
