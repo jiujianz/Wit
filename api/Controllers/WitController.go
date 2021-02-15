@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	models "../Models"
+	models "github.com/jiujianz/Wit/Models"
 
 	"github.com/gin-gonic/gin"
 )

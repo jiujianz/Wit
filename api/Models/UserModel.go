@@ -1,10 +1,10 @@
 package models
 
 import (
-	DBConfig "../Config"
-	Utility "../Utility"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	DBConfig "github.com/jiujianz/Wit/Config"
+	Utility "github.com/jiujianz/Wit/Utility"
 )
 
 type User struct {

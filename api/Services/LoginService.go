@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	models "../Models"
 	"github.com/dgrijalva/jwt-go"
+	models "github.com/jiujianz/Wit/Models"
 
 	"github.com/gin-gonic/gin"
 )
