@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	service "../Services"
+	service "github.com/jiujianz/Wit/Services"
 
 	"github.com/gin-gonic/gin"
 )

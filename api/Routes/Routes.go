@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
-	controller "../Controllers"
 	"github.com/gin-gonic/gin"
+	controller "github.com/jiujianz/Wit/Controllers"
 )
 
 // Router setupRouter

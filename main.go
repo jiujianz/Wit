@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	DBConfig "./api/Config"
-	models "./api/Models"
-	routes "./api/Routes"
 	"github.com/jinzhu/gorm"
+	DBConfig "github.com/jiujianz/Wit/Config"
+	models "github.com/jiujianz/Wit/Models"
+	routes "github.com/jiujianz/Wit/Routes"
 )
 
 var err error

@@ -1,8 +1,8 @@
 package models
 
 import (
-	DBConfig "../Config"
 	_ "github.com/go-sql-driver/mysql"
+	DBConfig "github.com/jiujianz/Wit/Config"
 )
 
 type Wit struct {
